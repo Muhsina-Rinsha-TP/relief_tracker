@@ -1,10 +1,18 @@
 from django.db import models
-from volunteer.models import RequiredItem
+from adminpanel.models import RequiredItem
+
+class Donor(models.Model):
+    name = models.CharField(max_length=100)
+    phone = models.CharField(max_length=15)
+    location = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.name
 
 class Donation(models.Model):
-    donor_name = models.CharField(max_length=100)
+    donor = models.ForeignKey(Donor, on_delete=models.CASCADE)
     item = models.ForeignKey(RequiredItem, on_delete=models.CASCADE)
-    quantity = models.IntegerField()
+    quantity = models.PositiveIntegerField()
     donation_method = models.CharField(
         max_length=20,
         choices=[('Direct', 'Direct'), ('Pickup', 'Pickup')]
@@ -13,6 +21,4 @@ class Donation(models.Model):
     date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.donor_name
-
-
+        return f"{self.donor.name} - {self.item.item_name}"

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Volunteer Dashboard</title>
+</head>
+<body>
+    <h1>Volunteer Dashboard</h1>
+    <p>List of Required Items:</p>
+    <table border="1" cellpadding="5">
+        <tr>
+            <th>Item Name</th>
+            <th>Required Quantity</th>
+            <th>Received Quantity</th>
+            <th>Action</th>
+        </tr>
+        {% for item in items %}
+        <tr>
+            <td>{{ item.item_name }}</td>
+            <td>{{ item.required_quantity }}</td>
+            <td>{{ item.received_quantity }}</td>
+            <td>
+                <a href="{% url 'update_delivery' item.id %}">Update Delivery</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Delivery</title>
+</head>
+<body>
+    <h1>Update Delivery for {{ item.item_name }}</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label>Status:</label>
+        <select name="status">
+            <option value="Collected">Collected</option>
+            <option value="Delivered">Delivered</option>
+        </select>
+        <label>Quantity:</label>
+        <input type="number" name="quantity" min="1" required>
+        <button type="submit">Update</button>
+    </form>
+</body>
+</html>

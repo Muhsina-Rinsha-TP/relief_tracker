@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Donor Home</title>
+</head>
+<body>
+    <h1>Donor Dashboard</h1>
+    <p>List of Required Items:</p>
+    <table border="1" cellpadding="5">
+        <tr>
+            <th>Item Name</th>
+            <th>Required Quantity</th>
+            <th>Received Quantity</th>
+            <th>Donate</th>
+        </tr>
+        {% for item in items %}
+        <tr>
+            <td>{{ item.item_name }}</td>
+            <td>{{ item.required_quantity }}</td>
+            <td>{{ item.received_quantity }}</td>
+            <td>
+                <form method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="item_id" value="{{ item.id }}">
+                    <input type="text" name="donor_name" placeholder="Your Name" required>
+                    <input type="number" name="quantity" placeholder="Quantity" min="1" required>
+                    <select name="donation_method">
+                        <option value="Direct">Direct</option>
+                        <option value="Pickup">Pickup</option>
+                    </select>
+                    <button type="submit">Donate</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
